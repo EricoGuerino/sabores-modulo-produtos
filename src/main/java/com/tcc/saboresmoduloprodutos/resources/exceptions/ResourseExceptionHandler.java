@@ -11,20 +11,21 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.tcc.saboresmoduloprodutos.service.exceptions.DataIntegrityException;
 import com.tcc.saboresmoduloprodutos.service.exceptions.ObjetoNaoEncontradoException;
+import com.tcc.saboresmoduloprodutos.utils.Util;
 
 @ControllerAdvice
 public class ResourseExceptionHandler {
 	@ExceptionHandler(ObjetoNaoEncontradoException.class)
 	public ResponseEntity<StandardError> objectNotFound(ObjetoNaoEncontradoException e, HttpServletRequest http) {
-		Integer status = HttpStatus.NOT_FOUND.value();
-		StandardError error = new StandardError(status, e.getMessage(), new Date());
-		return ResponseEntity.status(status).body(error);
+		HttpStatus status = HttpStatus.NOT_FOUND;
+		StandardError error = new StandardError(status.value(), e.getMessage(), new Date());
+		return Util.buildResponse(status).body(error);
 	}
 	
 	@ExceptionHandler(DataIntegrityException.class)
 	public ResponseEntity<StandardError> dataIntegrity(DataIntegrityException e, HttpServletRequest http) {
-		Integer status = HttpStatus.BAD_REQUEST.value();
-		StandardError error = new StandardError(status, e.getMessage(), new Date());
-		return ResponseEntity.status(status).body(error);
+		HttpStatus status = HttpStatus.NOT_FOUND;
+		StandardError error = new StandardError(status.value(), e.getMessage(), new Date());
+		return Util.buildResponse(status).body(error);
 	}
 }

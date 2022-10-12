@@ -7,5 +7,9 @@ import com.tcc.saboresmoduloprodutos.pojo.Produto;
 
 @Repository
 public interface ProdutoRepository extends JpaRepository<Produto, Integer>{
-
+	
+//	abstract void alteraProdutosLote(List<Produto> produto);
+//	abstract List<Produto> listarProdutosPorFabricante(Integer idFabricante);
+//	abstract List<Produto> alteraProdutosPorCategoria(Integer idCategoria);
+	
 }
